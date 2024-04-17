@@ -12,6 +12,18 @@ class Sudoku {
             [0, 0, 0, 0, 0, 0, 0, 0, 0],
             [0, 0, 0, 0, 0, 0, 0, 0, 0]
         ];
+        // save to grid from user input, so that all upcomming numbers can receive a different coloring
+        this.originalGrid = [
+            [0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0]
+        ];
         // x = 0 - 2
         // y = 0 - 2
         this.grid1 = [
@@ -85,8 +97,10 @@ class Sudoku {
             const col = i % 9;
             if(Number.isInteger(cellValue) && cellValue > 0 && cellValue <= 9) {
                 this.grid[row][col] = cellValue;
+                this.originalGrid[row][col] = cellValue;
             } else {
                 this.grid[row][col] = 0; 
+                this.originalGrid[row][col] = 0;
             }
         }
         console.log(this.grid); 
@@ -98,25 +112,29 @@ class Sudoku {
         for (let i = 0; i < 81; i++) {
             const row = Math.floor(i / 9);
             const col = i % 9;
-            document.getElementById(`cell-${i}`).value = this.grid[row][col];
+            if(this.originalGrid[row][col] != 0) {
+                document.getElementById(`cell-${i}`).value = this.grid[row][col];
+            } else {
+                document.getElementById(`cell-${i}`).style.color = "blue";
+                document.getElementById(`cell-${i}`).value = this.grid[row][col];
+            }
             console.log("the grid value:", this.grid[row][col], typeof(this.grid[row][col]));
             console.log("the table value:",document.getElementById(`cell-${i}`).value);    
         }
     }
 
     // Method to call isValid() and check if a certain number is valid for the cell
-    // also implement backtrack, if the number seems to be correct first, but isn't
     solve() {
         for (let x = 0; x < 9; x++) {
             for (let y = 0; y < 9; y++) {
                 if (this.grid[x][y] === 0) {
-                    for (let num = 1; num <= 9; num++) {
-                        if (this.isValid(x, y, num)) {
-                            this.grid[x][y] = num;
+                    for (let i = 1; i <= 9; i++) {
+                        if (this.isValid(x, y, i)) {
+                            this.grid[x][y] = i;
                             if (this.solve()) {
-                                return true; // Lösung gefunden, beende die rekursive Aufrufe
+                                return true; 
                             } else {
-                                this.grid[x][y] = 0; // Zurücksetzen, um eine andere Zahl auszuprobieren
+                                this.grid[x][y] = 0; // reset to try different number
                             }
                         }
                     }
@@ -127,30 +145,29 @@ class Sudoku {
         return true; // Alle Felder gefüllt, Rätsel gelöst
     }
 
-    // Fisher-Yates Shuffle
-    shuffle(array) {
-        var m = array.length, temp, i;
-
-        // While there remain elements to shuffle…
-        while (m) {
-          // Pick a remaining element…
-          i = Math.floor(Math.random() * m--);
-      
-          // And swap it with the current element.
-          temp = array[m];
-          array[m] = array[i];
-          array[i] = temp;
-        }
-      
-        return array;
-    }
-
-    // Called when `Reset` was pressed - whipes all input fields
-    reset() {
+    // Called when `Whipe` was pressed - whipes all input fields
+    whipe() {
         for (let i = 0; i < 81; i++) {
+            document.getElementById(`cell-${i}`).style.color = "black";
             const cell = document.getElementById(`cell-${i}`);
             cell.value = '';
         }
+    }
+
+    // Called when `Reset` was pressed - resets fields to user input 
+    reset() {
+        for (let i = 0; i < 81; i++) {
+            const row = Math.floor(i / 9);
+            const col = i % 9;
+            if(this.originalGrid[row][col] == 0) {
+                document.getElementById(`cell-${i}`).value = ''; 
+            } else {
+                document.getElementById(`cell-${i}`).value = this.originalGrid[row][col];
+            }
+            document.getElementById(`cell-${i}`).style.color = "black"; 
+        }
+        
+        console.log(this.originalGrid); 
     }
 
 /**
