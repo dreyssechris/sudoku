@@ -6,14 +6,14 @@ body {
   display: flex;
   flex-direction: column; /* place elements in cols */
   justify-content: center; /* center vertical */
-  align-items:center; /* center horizontal */
-  font-family: "Jersey 10", sans-serif;
+  align-items: center; /* center horizontal */
+  font-family: "Cinzel", serif;
+  font-weight:600;
 }
 
 table {
     border: 5px solid #272829;
     margin-left: 0 auto;
-
 }
 
 td {
@@ -40,6 +40,14 @@ input:disabled {
 
 h1 {
  text-align: center;
+}
+
+#error{
+  text-align: center;
+  visibility: hidden;
+  position: relative;
+  font-size: 25px;
+  color:#440524; 
 }
 
 #cell-0,  #cell-1,  #cell-2  { border-top:    2px solid #4d664d ; }
@@ -103,8 +111,10 @@ h1 {
   border: 0;
   user-select: none;
   margin-top: 10px;
-  padding-left: 50px;
-  padding-right: 50px;
+  padding-left: 30px;
+  padding-right: 30px;
+  font-family: "Cinzel", serif;
+  font-weight:600;
 }
 
 .solve-button:not(:disabled):hover {
@@ -125,20 +135,21 @@ h1 {
   color: #000;
   cursor: pointer;
   font-weight: bold;
+  font-size: 16px;
   padding: 10px 15px;
   text-align: center;
   transition: 200ms;
   width: auto;
   box-sizing: border-box;
   border: 0;
-  font-size: 16px;
   user-select: none;
   margin-top: 10px;
-  padding-left: 50px;
-  padding-right: 50px;
-  position: relative;
-  margin-left: 40px;
-  margin-right: 40px;
+  padding-left: 30px;
+  padding-right: 30px;
+  margin-left: 70px;
+  margin-right: 70px;
+  font-family: "Cinzel", serif;
+  font-weight:600;
 }
 
 .whipe-button:not(:disabled):hover {
@@ -159,18 +170,19 @@ h1 {
   color: #000;
   cursor: pointer;
   font-weight: bold;
+  font-size: 16px;
   padding: 10px 15px;
   text-align: center;
   transition: 200ms;
   width: auto;
   box-sizing: border-box;
   border: 0;
-  font-size: 16px;
   user-select: none;
   margin-top: 10px;
-  padding-left: 50px;
-  padding-right: 50px;
-  position: relative;
+  padding-left: 30px;
+  padding-right: 30px;
+  font-family: "Cinzel", serif;
+  font-weight:600;
 }
 
 .reset-button:not(:disabled):hover {

@@ -7,18 +7,18 @@
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Jersey+10&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&display=swap" rel="stylesheet">
     <script src="Sudoku.js"></script>
 </head>
 <body>
 <div class="container">
     <h1>
         <pre>
-         _____           __      __            _____       __               
-        / ___/__  ______/ /___  / /____  __   / ___/____  / /   _____  _____
-        \__ \/ / / / __  / __ \/ //_/ / / /   \__ \/ __ \/ / | / / _ \/ ___/
-   ___ / / /_/ / /_/ / /_/ /    / /_/ /   ___/ / /_/ / /| |/ /  __/ / 
-  /____/\____/\____/\____/_/|_|\____/   /____/\____/_/ |___/\___/_/ 
+       _____           __      __            _____       __               
+      / ___/__  ______/ /___  / /  __  __   / ___/____  / /   _____  _____
+      \__ \/ / / / __  / __ \/ //_/ / / /   \__ \/ __ \/ / | / / _ \/ ___/
+  ___/ / /_/ / /_/ / /_/ /    / /_/ /   ___/ / /_/ / /| |/ /  __/ / 
+/____/\____/\____/\____/_/|_|\____/   /____/\____/_/ |___/\___/_/ 
     </h1>
 
     <!-- 
@@ -26,6 +26,7 @@
         td = table data, so cells
     -->
   <div class="content">
+    <div id="error"></div>
     <div class="table-container">
       <table id="grid">
         <!-- 1st Row -->
@@ -178,13 +179,13 @@
     }
     function solve() {
       sudoku.setGrid();
-      sudoku.solve();
-      sudoku.loadSolvedGrid();
+      if(sudoku.solve()) {
+        sudoku.loadSolvedGrid();
+      }
     }
     function reset() {
       sudoku.reset();
     }
-
   </script>
 </div>
 
